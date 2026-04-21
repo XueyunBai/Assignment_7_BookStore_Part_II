@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block container %}
+<main>
+    <div id="mainLeft">
+        <h1 class="welcomeText">
+            Welcome to My Bookstore
+        </h1>
+
+        <p class="welcomeText">
+            Discover books across a variety of categories including fiction, science, history, and technology.
+        </p>
+        <p class="welcomeText">
+            Browse by category, search by title, and explore detailed information for each book.
+        </p>
+        <p class="welcomeText">
+            We are dedicated to making books easy to find and enjoyable to explore.
+        </p>
+    </div>
+
+    <div id="mainRight">
+        <h1>Shop by category:</h1>
+        <div id="categorySelections">
+            {% for category in categories %}
+            <div class="category">
+                <p>
+                    <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                        {{ category.categoryName }}
+                    </a>
+                </p>
+
+                <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                    <img
+                        src="{{ url_for('static', filename='images/categories/' + category.categoryImage) }}"
+                        alt="{{ category.categoryName }}"
+                    >
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

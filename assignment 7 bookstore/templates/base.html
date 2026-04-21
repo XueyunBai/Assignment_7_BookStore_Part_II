@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Bookstore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+  </head>
+  <body>
+    <header>
+      <div id="leftHeader">
+        <a href="{{ url_for('home') }}">
+          <h1>My Bookstore</h1>
+        </a>
+      </div>
+
+      <div id="midHeader">
+        <form id="searchBoxForm" action="{{ url_for('search') }}" method="post">
+          <input id="searchBox" type="text" placeholder="Search by title" name="search">
+          <button class="submitButton" type="submit">Search</button>
+        </form>
+
+        <div class="dropdown">
+          <p class="dropdownSelect">Browse Categories</p>
+          <div class="dropdownContent">
+            {% for category in categories %}
+              <p>
+                <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                  {{ category.categoryName }}
+                </a>
+              </p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div id="rightHeader">
+        <div class="loginButton">
+          <a href="{{ url_for('add_book') }}">Add Book</a>
+        </div>
+      </div>
+    </header>
+
+    {% block container %}{% endblock %}
+
+    <footer>
+      <div id="footerLeft">
+        <p>My Bookstore</p>
+        <p>&copy; 2025</p>
+      </div>
+      <div id="footerRight">
+        <p>Books for everyone</p>
+      </div>
+    </footer>
+  </body>
+</html>
